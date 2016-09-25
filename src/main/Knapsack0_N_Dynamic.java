@@ -20,7 +20,7 @@ public class Knapsack0_N_Dynamic {
             i.toSingle().forEach(newItems::add);
         }
 
-        D[][] cache = new D[items.length][sackWeight+1];
+        D[][] cache = new D[newItems.size()][sackWeight+1];
 
         cache = init(cache, newItems.toArray(new Item[newItems.size()]));
 
@@ -28,11 +28,11 @@ public class Knapsack0_N_Dynamic {
             for (int j = 0; j < cache[0].length; j++) {
                 D v1 = cache[i-1][j];
                 D v2 = new D(0, new ArrayList<>());
-                System.out.println();
-                print(cache);
-                System.out.println();
-                if (j - items[i].weight >= 0) {
-                    D temp = cache[i-1][j - items[i].weight];
+                //System.out.println();
+                //print(cache);
+                //System.out.println();
+                if (j - newItems.get(i).weight >= 0) {
+                    D temp = cache[i-1][j - newItems.get(i).weight];
                     Item item = newItems.get(i);
                     List<Item> it = new ArrayList<>(temp.list);
                     it.add(item);
@@ -42,12 +42,13 @@ public class Knapsack0_N_Dynamic {
                 cache[i][j] = max(v1, v2);
             }
         }
-        print(cache);
-        newItems = cache[items.length-1][cache[items.length-1].length-1].list;
+        //print(cache);
+        newItems = cache[cache.length-1][cache[cache.length-1].length-1].list;
         List<MultipleItem> l = new ArrayList<>();
 
         Map<String, List<Item>> map = new HashMap<>();
         for (Item i : newItems) {
+            //System.out.println("Cats");
             String name = i.name.substring(0, i.name.indexOf('_'));
             if (map.containsKey(name)) {
                 map.get(name).add(i);
@@ -67,7 +68,7 @@ public class Knapsack0_N_Dynamic {
         for (int i = 0; cache.length > 0 && i < cache[0].length; i++) {
             D v1 = new D(0, new ArrayList<>());
             if (items[0].weight <= i) {
-                System.out.println("Should be here");
+                //System.out.println("Should be here");
                 List<Item> it = new ArrayList<>();
                 it.add(items[0]);
                 v1 = new D(items[0].value, it);
@@ -102,7 +103,7 @@ public class Knapsack0_N_Dynamic {
     }
 
     public static void main(String[] arg) {
-        Knapsack0_N_Brute k = new Knapsack0_N_Brute();
+        Knapsack0_N_Dynamic k = new Knapsack0_N_Dynamic();
         MultipleItem[] items =  new MultipleItem[] {new MultipleItem("A", 1,2,2), new MultipleItem("B",3,2,1),
                 new MultipleItem("C", 2,7,3), new MultipleItem("D", 2,2,3),
                 new MultipleItem("E", 2,4,1),new MultipleItem("F", 4,2,2)};

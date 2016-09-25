@@ -20,9 +20,9 @@ public class Knapsack0_1 {
             for (int j = 0; j < cache[0].length; j++) {
                 D v1 = cache[i-1][j];
                 D v2 = new D(0, new ArrayList<>());
-                System.out.println();
-                print(cache);
-                System.out.println();
+                //System.out.println();
+                //print(cache);
+                //System.out.println();
                 if (j - items[i].weight >= 0) {
                     D temp = cache[i-1][j - items[i].weight];
                     Item item = items[i];
@@ -34,7 +34,7 @@ public class Knapsack0_1 {
                 cache[i][j] = max(v1, v2);
             }
         }
-        print(cache);
+        //print(cache);
         List<Item> i = cache[items.length-1][cache[items.length-1].length-1].list;
         return i.toArray(new Item[i.size()]);
     }
@@ -43,7 +43,7 @@ public class Knapsack0_1 {
         for (int i = 0; cache.length > 0 && i < cache[0].length; i++) {
             D v1 = new D(0, new ArrayList<>());
             if (items[0].weight <= i) {
-                System.out.println("Should be here");
+                //System.out.println("Should be here");
                 List<Item> it = new ArrayList<>();
                 it.add(items[0]);
                 v1 = new D(items[0].value, it);
