@@ -58,7 +58,7 @@ public class Knapsack0_N_Dynamic {
                 map.put(name, temp);
             }
         }
-
+        //print(cache);
         l.addAll(map.values().stream().map(MultipleItem::new).collect(Collectors.toList()));
 
         return l.toArray(new MultipleItem[l.size()]);

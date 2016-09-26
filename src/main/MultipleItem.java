@@ -35,4 +35,37 @@ public class MultipleItem {
         }
         return items;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        MultipleItem that = (MultipleItem) o;
+
+        if (weight != that.weight) return false;
+        if (value != that.value) return false;
+        if (amount != that.amount) return false;
+        return name.equals(that.name);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + weight;
+        result = 31 * result + value;
+        result = 31 * result + amount;
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "MultipleItem{" +
+                "name='" + name + '\'' +
+                ", weight=" + weight +
+                ", value=" + value +
+                ", amount=" + amount +
+                '}';
+    }
 }
